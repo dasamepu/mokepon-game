@@ -290,13 +290,7 @@ function secuenciaAtaque() {
 }
 
 function seleccionarMascotaEnemigo(enemigo) {
-    /* let mascota_aleatoria = aleatorio(0, mokepones.length-1)
-    
-    nombre_mascota_enemigo = mokepones[mascota_aleatoria].nombre
-    span_mascotaenemigo.innerHTML = nombre_mascota_enemigo
-    
-    ataques_mokepon_enemigo = mokepones[mascota_aleatoria].ataques */
-    
+
     console.log(enemigo);
 
     span_mascotaenemigo.innerHTML = enemigo.nombre
@@ -435,10 +429,9 @@ function pintarCanvas() {
 
     enviarPosicion(mascota_jugador_objeto.x, mascota_jugador_objeto.y)
 
-    hipodoge_enemigo.pintarMokepon()
-    capipepo_enemigo.pintarMokepon()
-    ratigueya_enemigo.pintarMokepon()
-    pikachu_enemigo.pintarMokepon()
+    mokeponesEnemigos.forEach(function (mokepon){
+        mokepon.pintarMokepon()
+    })
     if (mascota_jugador_objeto.velocidadX !==0 || mascota_jugador_objeto.velocidadY !==0) {
         revisarColision(hipodoge_enemigo)
         revisarColision(capipepo_enemigo)
@@ -461,10 +454,10 @@ function enviarPosicion(x, y) {
     .then(function (res){
         if (res.ok){
             res.json()
-            .then(function ({enemigos}){
-                console.log(enemigos);
-                enemigos.forEach(function (enemigo){
-                    let mokeponEnemigo = null 
+            .then(function ({ enemigos }) {
+                console.log(enemigos)
+                mokeponesEnemigos = enemigos.map(function (enemigo) {
+                    let mokeponEnemigo = null
                     const mokeponNombre = enemigo.mokepon.nombre || ""
                     if (mokeponNombre === "Hipodoge") {
                         mokeponEnemigo = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', num_vidasenemigo, './assets/hipodoge.png')
@@ -478,7 +471,7 @@ function enviarPosicion(x, y) {
                     mokeponEnemigo.x = enemigo.x
                     mokeponEnemigo.y = enemigo.y
 
-                    mokeponEnemigo.pintarMokepon()
+                    return mokeponEnemigo
                 })
             })
         }
