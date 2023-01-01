@@ -25,6 +25,7 @@ const mapa = document.getElementById("id_mapa")
 
 let jugadorId = null
 let mokepones = []
+let mokeponesEnemigos = []
 let ataque_jugador = []
 let ataque_enemigo = []
 let opcion_de_mokepones
@@ -474,6 +475,9 @@ function enviarPosicion(x, y) {
                     } else if (mokeponNombre === "Pikachu") {
                         mokeponEnemigo = new Mokepon("Pikachu", "./assets/pikachu.png", num_vidasenemigo, "./assets/pikachu_cabeza.png")
                     }
+                    mokeponEnemigo.x = enemigo.x
+                    mokeponEnemigo.y = enemigo.y
+
                     mokeponEnemigo.pintarMokepon()
                 })
             })
