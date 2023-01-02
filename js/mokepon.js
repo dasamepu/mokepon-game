@@ -25,7 +25,7 @@ const section_ver_mapa = document.getElementById("ver_mapa");
 const mapa = document.getElementById("id_mapa")
 
 let jugadorId = null
-let enemigoId = null
+let enemigoId = null 
 let mokepones = []
 let mokeponesEnemigos = []
 let ataque_jugador = []
@@ -466,11 +466,11 @@ function enviarPosicion(x, y) {
                     let mokeponEnemigo = null
                     const mokeponNombre = enemigo.mokepon.nombre || ""
                     if (mokeponNombre === "Hipodoge") {
-                        mokeponEnemigo = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', num_vidasenemigo, './assets/hipodoge.png')
+                        mokeponEnemigo = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', num_vidasenemigo, './assets/hipodoge.png', enemigo.id)
                     }else if (mokeponNombre === "Capipepo") {
-                        mokeponEnemigo = new Mokepon('Capipepo', './assets/mokepons_mokepon_capipepo_attack.png', num_vidasenemigo, './assets/capipepo.png')
+                        mokeponEnemigo = new Mokepon('Capipepo', './assets/mokepons_mokepon_capipepo_attack.png', num_vidasenemigo, './assets/capipepo.png', enemigo.id)
                     } else if (mokeponNombre === "Ratigueya") {
-                        mokeponEnemigo = new Mokepon('Ratigueya', './assets/mokepons_mokepon_ratigueya_attack.png', num_vidasenemigo, './assets/ratigueya.png')
+                        mokeponEnemigo = new Mokepon('Ratigueya', './assets/mokepons_mokepon_ratigueya_attack.png', num_vidasenemigo, './assets/ratigueya.png', enemigo.id)
                     } else if (mokeponNombre === "Pikachu") {
                         mokeponEnemigo = new Mokepon("Pikachu", "./assets/pikachu.png", num_vidasenemigo, "./assets/pikachu_cabeza.png")
                     }
@@ -566,7 +566,7 @@ function revisarColision(enemigo){
     detenerMovimiento()
     clearInterval(intervalo)
     console.log('Se detecto una colision');
-
+    
     enemigoId = enemigo.id
     section_seleccionar_ataque.style.display = 'flex'
     section_ver_mapa.style.display = 'none'
