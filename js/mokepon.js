@@ -254,6 +254,9 @@ function mostrarAtaques(ataques){
         
     });
 
+    botonfuego = document.getElementById('boton-fuego')
+    botonagua = document.getElementById('boton-agua')
+    botontierra = document.getElementById('boton-tierra')
     botones = document.querySelectorAll(".BAtaque")
 
 }
@@ -262,31 +265,45 @@ function secuenciaAtaque() {
     botones.forEach((boton) => {
         boton.addEventListener("click", (e) => {
             if (e.target.textContent === "🔥!!!") {
-                ataque_jugador.push("🔥")
+                ataque_jugador.push("FUEGO")
                 console.log(ataque_jugador, "J");
                 boton.style.background = "#345612"
                 boton.disabled = true
             } else if (e.target.textContent === "🌧️!!!") {
-                ataque_jugador.push("🌧️")
+                ataque_jugador.push("AGUA")
                 console.log(ataque_jugador, "J");
                 boton.style.background = "#345612"
                 boton.disabled = true
             } else if (e.target.textContent === "🌩️!!!") {
-                ataque_jugador.push("🌩️")
+                ataque_jugador.push("RAYO")
                 console.log(ataque_jugador, "J");
                 boton.style.background = "#345612"
                 boton.disabled = true
             } else {
-                ataque_jugador.push("🌲")
+                ataque_jugador.push("TIERRA")
                 console.log(ataque_jugador, "J");
                 boton.style.background = "#345612"
                 boton.disabled = true
             }
-            generarAtaquesDelEnemigo()
-            ataqueEnemigo()
+            /* generarAtaquesDelEnemigo()
+            ataqueEnemigo() */
+            if (ataque_jugador.length === 5) {
+                enviarAtaques()   
+            }
         })
     })
-    
+}
+
+function enviarAtaques() {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ataques: ataque_jugador
+        })
+    })
 }
 
 function seleccionarMascotaEnemigo(enemigo) {
@@ -332,11 +349,11 @@ function indexAmbosOponentes(jugador,enemigo) {
 function combate() {
     
     for (let index = 0; index < ataque_jugador.length; index++) {
-        if (ataque_jugador[index] === ataque_enemigo[index] || ataque_jugador[index]=="🌩️" && ataque_enemigo[index]=="🌲" || ataque_jugador[index]=="🌲" && ataque_enemigo[index]=="🌩️") {
+        if (ataque_jugador[index] === ataque_enemigo[index] || ataque_jugador[index]=="RAYO" && ataque_enemigo[index]=="TIERRA" || ataque_jugador[index]=="TIERRA" && ataque_enemigo[index]=="RAYO") {
             indexAmbosOponentes(index,index)
             console.log("Resultado: EMPATE");
             addMensaje()
-        } else if(ataque_jugador[index]=="🔥" && ataque_enemigo[index]=="🌲" ||ataque_jugador[index]=="🌧️" && ataque_enemigo[index]=="🔥" || ataque_jugador[index]=="🌲" && ataque_enemigo[index]=="🌧️" || ataque_jugador[index]=="🌩️" && ataque_enemigo[index]=="🌧️" || ataque_jugador[index]=="🔥" && ataque_enemigo[index]=="🌩️"){
+        } else if(ataque_jugador[index]=="FUEGO" && ataque_enemigo[index]=="TIERRA" ||ataque_jugador[index]=="AGUA" && ataque_enemigo[index]=="FUEGO" || ataque_jugador[index]=="TIERRA" && ataque_enemigo[index]=="AGUA" || ataque_jugador[index]=="RAYO" && ataque_enemigo[index]=="AGUA" || ataque_jugador[index]=="FUEGO" && ataque_enemigo[index]=="RAYO"){
             indexAmbosOponentes(index,index)
             console.log("Resultado: GANASTE");
             addMensaje()
@@ -431,13 +448,8 @@ function pintarCanvas() {
 
     mokeponesEnemigos.forEach(function (mokepon){
         mokepon.pintarMokepon()
+        revisarColision(mokepon)
     })
-    if (mascota_jugador_objeto.velocidadX !==0 || mascota_jugador_objeto.velocidadY !==0) {
-        revisarColision(hipodoge_enemigo)
-        revisarColision(capipepo_enemigo)
-        revisarColision(ratigueya_enemigo)
-        revisarColision(pikachu_enemigo)     
-    }
 }
 
 function enviarPosicion(x, y) {
