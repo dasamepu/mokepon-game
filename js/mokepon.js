@@ -196,7 +196,7 @@ function unirseAlJuego() {
 
 function seleccionarMascota() {
     
-    section_seleccionar_mascota.style.display = "none"
+    
 
     if(input_hipodoge.checked){
         span_mascotajugador.innerHTML = input_hipodoge.id
@@ -211,8 +211,11 @@ function seleccionarMascota() {
         span_mascotajugador.innerHTML = input_pikachu.id
         mascota_jugador = input_pikachu.id
     }else{
-        console.log("MOKEPON NO SELECCIONADO");
+        alert("MOKEPON NO SELECCIONADO");
+        return
     }
+
+    section_seleccionar_mascota.style.display = "none"
 
     seleccionarMokepon(mascota_jugador)
 
