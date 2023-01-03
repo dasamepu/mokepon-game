@@ -27,11 +27,31 @@
         <h2 class="subtitulo">Recorre el mapa<br>con tu mokepon:</h2>
         <canvas id="id_mapa"></canvas>
         
-        <button onmouseup="detenerMovimiento()" onmousedown="moverArriba()">⬆️</button>
+        <button 
+        onmouseup="detenerMovimiento()" 
+        onmousedown="moverArriba()"
+        ontouchend="detenerMovimiento()"
+        ontouchstart="moverArriba()"
+        >⬆️</button>
         <div>
-            <button onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()">⬅️</button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">⬇️</button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">➡️</button>
+            <button 
+            onmouseup="detenerMovimiento()" 
+            onmousedown="moverIzquierda()"
+            ontouchend="detenerMovimiento()"
+            ontouchstart="moverIzquierda()"
+            >⬅️</button>
+            <button 
+            onmouseup="detenerMovimiento()" 
+            onmousedown="moverAbajo()"
+            ontouchend="detenerMovimiento()"
+            ontouchstart="moverAbajo()"
+            >⬇️</button>
+            <button 
+            onmouseup="detenerMovimiento()" 
+            onmousedown="moverDerecha()"
+            ontouchend="detenerMovimiento()"
+            ontouchstart="moverDerecha()"
+            >➡️</button>
         </div>
     </section>
 
