@@ -3,6 +3,7 @@ const cors = require("cors")
 
 const app = express()
 
+app.use(express.static("puclic"))
 app.use(cors())
 app.use(express.json())
 
