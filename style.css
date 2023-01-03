@@ -164,6 +164,11 @@ input:checked + label{
     margin: 10px 0;
 }
 
+#id_mensaje_no_elijio_mokepon{
+    text-align: center;
+    padding-top: 50%;
+}
+
 @media (max-width: 650px){
     #tarjetas, .tarjetas-ataques{
         flex-direction: column;
