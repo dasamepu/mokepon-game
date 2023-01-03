@@ -9,8 +9,6 @@ const section_seleccionar_mascota = document.getElementById("seleccionar-mascota
 
 const span_mascotajugador = document.getElementById("id_mascotajugador")
 
-const section_noelijio = document.getElementById("id_mensaje_no_elijio_mokepon")
-
 const span_mascotaenemigo = document.getElementById("id_mascotaenemigo")
 
 const span_vidasjugador = document.getElementById("id_vidas_jugador")
@@ -213,7 +211,7 @@ function seleccionarMascota() {
         span_mascotajugador.innerHTML = input_pikachu.id
         mascota_jugador = input_pikachu.id
     }else{
-        section_noelijio.innerHTML = "MOKEPON NO SELECCIONADO"
+        console.log("MOKEPON NO SELECCIONADO");
     }
 
     seleccionarMokepon(mascota_jugador)
