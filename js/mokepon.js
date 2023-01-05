@@ -1,25 +1,27 @@
-const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
+const sectionSeleccionarAtaque = document.getElementById('select_ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
-const botonMascotaJugador = document.getElementById('boton-mascota')
-const botonReiniciar = document.getElementById('boton-reiniciar')
+const botonMascotaJugador = document.getElementById('boton_mascota')
+
+const botonReiniciar = document.getElementById('boton_reiniciar')
 sectionReiniciar.style.display = 'none'
 
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
-const spanMascotaJugador = document.getElementById('mascota-jugador')
 
-const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+const spanMascotaJugador = document.getElementById('id_mascotajugador')
 
-const spanVidasJugador = document.getElementById('vidas-jugador')
-const spanVidasEnemigo = document.getElementById('vidas-enemigo')
+const spanMascotaEnemigo = document.getElementById('id_mascotaenemigo')
 
-const sectionMensajes = document.getElementById('resultado')
-const ataquesDelJugador = document.getElementById('ataques-del-jugador')
-const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
-const contenedorTarjetas = document.getElementById('contenedorTarjetas')
-const contenedorAtaques = document.getElementById('contenedorAtaques')
+const spanVidasJugador = document.getElementById('id_vidas_jugador')
+const spanVidasEnemigo = document.getElementById('id_vidas_enemigo')
 
-const sectionVerMapa = document.getElementById('ver-mapa')
-const mapa = document.getElementById('mapa')
+const sectionMensajes = document.getElementById('id_resultado')
+const ataquesDelJugador = document.getElementById('id_ataques_deljugador')
+const ataquesDelEnemigo = document.getElementById('id_ataques_delenemigo')
+const contenedorTarjetas = document.getElementById('id_contenedor_tajetas')
+const contenedorAtaques = document.getElementById('id_contenedor_ataques')
+
+const sectionVerMapa = document.getElementById('ver_mapa')
+const mapa = document.getElementById('id_mapa')
 
 let mokepones = []
 let ataqueJugador =[]
@@ -35,7 +37,9 @@ let ataquesMokeponEnemigo
 let botonFuego
 let botonAgua
 let botonTierra
-let botones = []
+let botones = [] 
+let num_ataque_enemigo
+let ataques_mokepon_enemigo = []
 let indexAtaqueJugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
@@ -107,11 +111,11 @@ hipodoge.ataques.push(
 )
 
 hipodogeEnemigo.ataques.push(
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: 'AGUA', id: 'boton-agua' },
+    { nombre: 'AGUA', id: 'boton-agua' },
+    { nombre: 'AGUA', id: 'boton-agua' },
+    { nombre: 'FUEGO', id: 'boton-fuego' },
+    { nombre: 'TIERRA', id: 'boton-tierra' },
 )
 
 capipepo.ataques.push(
@@ -124,11 +128,11 @@ capipepo.ataques.push(
 )
 
 capipepoEnemigo.ataques.push(
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: 'TIERRA', id: 'boton-tierra' },
+    { nombre: 'TIERRA', id: 'boton-tierra' },
+    { nombre: 'TIERRA', id: 'boton-tierra' },
+    { nombre: 'AGUA', id: 'boton-agua' },
+    { nombre: 'FUEGO', id: 'boton-fuego' },
     
 )
 
@@ -141,11 +145,11 @@ ratigueya.ataques.push(
 )
 
 ratigueyaEnemigo.ataques.push(
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🔥', id: 'boton-fuego' }, 
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: 'FUEGO', id: 'boton-fuego' },
+    { nombre: 'FUEGO', id: 'boton-fuego' },
+    { nombre: 'FUEGO', id: 'boton-fuego' }, 
+    { nombre: 'AGUA', id: 'boton-agua' },
+    { nombre: 'TIERRA', id: 'boton-tierra' },
 )
 
 mokepones.push(hipodoge,capipepo,ratigueya)
@@ -243,7 +247,9 @@ function secuenciaAtaque() {
                 boton.style.background = '#112f58'
                 boton.disabled = true  
             }
+            generarAtaquesDelEnemigo()
             ataqueAleatorioEnemigo()
+            
         })
     })
     
@@ -256,19 +262,43 @@ function seleccionarMascotaEnemigo(enemigo) {
     secuenciaAtaque()
 }
 
+function createArrayOfNumbers(start, end){
+    let myArray = [];
+    for(let i = start; i <= end; i++) { 
+        myArray.push(i);
+    }
+    return myArray;
+}
+
+
+num_ataque_enemigo = createArrayOfNumbers(0, 4)
+console.log(num_ataque_enemigo);
+
+function generarAtaquesDelEnemigo(){
+    if(num_ataque_enemigo.length == 0){
+        console.log("se acabaron los ataques del enemigo");
+        return;
+    }
+    let randomIndex = aleatorio(0, num_ataque_enemigo.length-1);
+    let randomNumber = num_ataque_enemigo[randomIndex];
+    num_ataque_enemigo.splice(randomIndex, 1)
+    rand_atack_enemi = randomNumber;
+    console.log(num_ataque_enemigo);
+
+}
 
 function ataqueAleatorioEnemigo() {
-    console.log('Ataques enemigo', ataquesMokeponEnemigo);
-    let ataqueAleatorio = aleatorio(0,ataquesMokeponEnemigo.length -1)
     
-    if (ataqueAleatorio == 0 || ataqueAleatorio ==1) {
-        ataqueEnemigo.push('FUEGO')
-    } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) {
-        ataqueEnemigo.push('AGUA')
-    } else {
-        ataqueEnemigo.push('TIERRA')
+    switch (rand_atack_enemi) {
+        case rand_atack_enemi:
+            ataqueEnemigo.push(ataquesMokeponEnemigo[rand_atack_enemi].nombre)
+            console.log(ataqueEnemigo, "E");
+            break;
+        
+        default:
+            console.log("error error");
+            break;
     }
-    console.log(ataqueEnemigo)
     iniciarPelea()
 }
 
